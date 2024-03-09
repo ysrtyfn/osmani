@@ -3,7 +3,7 @@ import { harfLatinidenOsmaniye } from "./harfLatinidenOsmaniye";
 
 export type OsmaniHarfEkleNeticesi = {
   kelimeOsmani: string;
-  karetMevkisi: number;
+  karetBaşMevkisi: number;
 };
 
 export function ekleOsmaniKelimeyeHarf(
@@ -21,7 +21,7 @@ export function ekleOsmaniKelimeyeHarf(
       hadise.altKey
     );
 
-    return { kelimeOsmani: kelime, karetMevkisi: kelime.length };
+    return { kelimeOsmani: kelime, karetBaşMevkisi: kelime.length };
   }
 
   const { başMevki, sonMevki } = karetMevkisi;
@@ -29,24 +29,20 @@ export function ekleOsmaniKelimeyeHarf(
   const karetAhiri = kelime.slice(sonMevki);
 
   if (hadise.key === "Backspace") {
-    let karetEvveliSilinmedenSonra = karetEvveli;
+    let silinecekHarfAdedi = 1;
     if (karetEvveli.endsWith("\u200C")) {
-      karetEvveliSilinmedenSonra = karetEvveli.slice(
-        0,
-        karetEvveliSilinmedenSonra.length - 2
-      );
-    } else {
-      karetEvveliSilinmedenSonra = karetEvveli.slice(
-        0,
-        karetEvveliSilinmedenSonra.length - 1
-      );
+      silinecekHarfAdedi = 2;
     }
+    const silinmedenSonra = karetEvveli.slice(
+      0,
+      karetEvveli.length - silinecekHarfAdedi
+    );
 
-    kelime = karetEvveliSilinmedenSonra + karetAhiri;
+    kelime = silinmedenSonra + karetAhiri;
 
     return {
       kelimeOsmani: kelime,
-      karetMevkisi: karetEvveliSilinmedenSonra.length - 1,
+      karetBaşMevkisi: silinmedenSonra.length,
     };
   } else {
     const harf = harfLatinidenOsmaniye(
@@ -57,9 +53,16 @@ export function ekleOsmaniKelimeyeHarf(
     );
 
     kelime = karetEvveli + harf + karetAhiri;
+
+    let karetHareketMiktarı = harf.length;
+    if (karetEvveli.endsWith("ا") && harf === "ا") {
+      kelime = kelime.replace("اا", "آ");
+      karetHareketMiktarı = harf.length - 1;
+    }
+
     return {
       kelimeOsmani: kelime,
-      karetMevkisi: karetEvveli.length + harf.length - 1,
+      karetBaşMevkisi: karetEvveli.length + karetHareketMiktarı,
     };
   }
 }
