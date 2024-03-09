@@ -8,6 +8,12 @@ Klavyeden basılan harfin yerine Osmani mukabilini yazar.
 Bu memba React ile hazırlanan sahifelerde kullanılmak için geliştirilmiştir.
 Sırası ile aşağıdaki adımları takip edelim:
 
+Membayı projemize dahil ederiz:
+
+```
+  npm install osmani
+```
+
 **useOsmani** çengelini unsura dahil ederiz:
 
 ```
