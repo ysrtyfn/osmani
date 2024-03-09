@@ -1,0 +1,42 @@
+{
+  "name": "osmani",
+  "version": "1.0.1",
+  "description": "Latini klavye ile Osmani metin yazmak için hazırlanmış bir alettir.",
+  "keywords": [
+    "osmani",
+    "turkish",
+    "elifba",
+    "keyboard",
+    "tercüme",
+    "ottoman",
+    "latini"
+  ],
+  "type": "module",
+  "main": "teshir/index",
+  "types": "teshir/index",
+  "scripts": {
+    "preinsa": "rm -rf teshir",
+    "insa": "tsc -p .",
+    "tecrube": "tsx watch memba/index.ts",
+    "tedkik": "jest"
+  },
+  "author": "Tayfun Yaşar",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "jest": "^29.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts-jest": "^29.1.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21"
+  }
+}

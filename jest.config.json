@@ -1,0 +1,12 @@
+{
+  "verbose": true,
+  "displayName": "useOsmani",
+  "roots": ["<rootDir>/memba"],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(tedkik|test).+(ts|tsx|js)"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  }
+}
