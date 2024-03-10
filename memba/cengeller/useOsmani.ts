@@ -13,20 +13,17 @@ type OsmaniÇengelHususları = {
   aramaTalepEdilince?: () => void;
 };
 
-type OsmaniÇengelCevabı = [
-  kelime: string,
-  metinSahasıİması: RefObject<HTMLInputElement>
-];
+type OsmaniÇengelCevabı<T> = [kelime: string, metinSahasıİması: RefObject<T>];
 
 // TODO: tecrübe edilmeli
 
-export const useOsmani = (
+export const useOsmani = <T>(
   hususlar?: OsmaniÇengelHususları
-): OsmaniÇengelCevabı => {
+): OsmaniÇengelCevabı<T> => {
   const ibtidaiKelime = hususlar ? hususlar.ibtidaiKelime : "";
 
   const [kelime, tebdilKelime] = useState(ibtidaiKelime);
-  const metinSahasıİması = useRef<HTMLInputElement>(null);
+  const metinSahasıİması = useRef<T>(null);
   const karetMevkisiİması = useRef<Nevi_KaretMevkisi>(
     hazırlaKaretMevkisini(ibtidaiKelime.length)
   );
@@ -84,13 +81,13 @@ export const useOsmani = (
       tebdilKaretMevkisini(metinSahası, karetMevkisiİması.current.başMevki);
     };
 
-    metinSahası.focus();
+    // metinSahası.focus();
     metinSahası.addEventListener("keydown", tuşaBasılınca, false);
 
     return () => {
       metinSahası.removeEventListener("keydown", tuşaBasılınca);
     };
-  }, [hususlar, kelime]);
+  }, [kelime]);
 
   return [kelime, metinSahasıİması];
 };
