@@ -3,8 +3,9 @@ import { kelimeBaşıMı } from "../aletler/kelimeBasiMi";
 export function harfLatinidenOsmaniye(
   latiniHarf: string,
   öncekiHarf: string,
-  shiftBasiliMi: boolean,
-  altBasiliMi: boolean
+  shiftBasılıMı: boolean,
+  altBasılıMı: boolean,
+  capsLockBasılıMı: boolean
 ) {
   switch (latiniHarf) {
     case "Enter":
@@ -23,6 +24,8 @@ export function harfLatinidenOsmaniye(
       return "";
     case "Backspace":
       return "";
+    case "Tab":
+      return "";
 
     case " ":
       return " ";
@@ -37,37 +40,14 @@ export function harfLatinidenOsmaniye(
       return ":";
     case "?":
       return "؟";
-    case "=":
-      return "=";
-    case ")":
-      return ")";
-    case "(":
-      return "(";
-    case "{":
-      return "{";
-    case "}":
-      return "}";
-    case "&":
-      return "&";
-    case "%":
-      return "%";
-    case "#":
-      return "#";
-
-    case "+":
-      return "+";
-    case "-":
-      return "-";
-    case "*":
-      return "*";
-    case "/":
-      return "/";
 
     case "a":
     case "A":
-      if (shiftBasiliMi) {
+      if (capsLockBasılıMı) {
+        return "\u0650"; // Kesra
+      } else if (shiftBasılıMı) {
         return "ع";
-      } else if (altBasiliMi) {
+      } else if (altBasılıMı) {
         // return "أ";
         return "\u0623";
       }
@@ -79,6 +59,9 @@ export function harfLatinidenOsmaniye(
 
     case "c":
     case "C":
+      if (capsLockBasılıMı) {
+        return "\u0670"; // Elif Üst
+      }
       return "ج";
 
     case "ç":
@@ -87,17 +70,25 @@ export function harfLatinidenOsmaniye(
 
     case "d":
     case "D":
-      if (shiftBasiliMi) {
+      if (capsLockBasılıMı) {
+        return "\u0654"; // Hemze Üst
+      } else if (shiftBasılıMı) {
         return "ض";
       }
       return "د";
 
     case "e":
     case "E":
+      if (capsLockBasılıMı) {
+        return "\u0651"; // Şedde
+      }
       return "ه" + "\u200C";
 
     case "f":
     case "F":
+      if (capsLockBasılıMı) {
+        return "\u0655"; // Hemze Alt
+      }
       return "ف";
 
     case "g":
@@ -106,16 +97,16 @@ export function harfLatinidenOsmaniye(
 
     case "ğ":
     case "Ğ":
-      if (shiftBasiliMi) {
+      if (shiftBasılıMı) {
         return "ػ";
       }
       return "غ";
 
     case "h":
     case "H":
-      if (shiftBasiliMi) {
+      if (shiftBasılıMı) {
         return "خ";
-      } else if (altBasiliMi) {
+      } else if (altBasılıMı) {
         return "ه";
       }
       return "ح";
@@ -146,6 +137,9 @@ export function harfLatinidenOsmaniye(
 
     case "q":
     case "Q":
+      if (capsLockBasılıMı) {
+        return "\u064E"; // Fetha
+      }
       return "ق";
 
     case "l":
@@ -158,7 +152,7 @@ export function harfLatinidenOsmaniye(
 
     case "n":
     case "N":
-      if (shiftBasiliMi) {
+      if (shiftBasılıMı) {
         return "ڭ";
       }
       return "ن";
@@ -183,13 +177,18 @@ export function harfLatinidenOsmaniye(
 
     case "r":
     case "R":
+      if (capsLockBasılıMı) {
+        return "\u0652"; // Sukun
+      }
       return "ر";
 
     case "s":
     case "S":
-      if (shiftBasiliMi) {
+      if (capsLockBasılıMı) {
+        return "\u064D"; // Kesra Tenvin
+      } else if (shiftBasılıMı) {
         return "ص";
-      } else if (altBasiliMi) {
+      } else if (altBasılıMı) {
         return "ث";
       }
       return "س";
@@ -200,7 +199,9 @@ export function harfLatinidenOsmaniye(
 
     case "t":
     case "T":
-      if (shiftBasiliMi) {
+      if (capsLockBasılıMı) {
+        return "\u0653"; // Med
+      } else if (shiftBasılıMı) {
         return "ط";
       }
       return "ت";
@@ -221,11 +222,14 @@ export function harfLatinidenOsmaniye(
 
     case "v":
     case "V":
+      if (capsLockBasılıMı) {
+        return "\u0656"; // Elif Üst
+      }
       return "و";
 
     case "y":
     case "Y":
-      if (shiftBasiliMi) {
+      if (shiftBasılıMı) {
         return "ئ";
       }
       return "ي";
@@ -233,22 +237,29 @@ export function harfLatinidenOsmaniye(
 
     case "z":
     case "Z":
-      if (shiftBasiliMi) {
+      if (capsLockBasılıMı) {
+        return "\u064F"; // Damme
+      } else if (shiftBasılıMı) {
         return "ظ";
-      } else if (altBasiliMi) {
+      } else if (altBasılıMı) {
         return "ذ";
       }
       return "ز";
 
     case "w":
     case "W":
-      if (shiftBasiliMi) {
-        return "ء";
+      if (capsLockBasılıMı) {
+        return "\u064B"; // Fetha Tenvin
+      } else if (shiftBasılıMı) {
+        return "\u0674"; // Hemze
       }
-      return "\u200C";
+      return "\u200C"; // Harflerin birleşmesine mani oluyor
 
     case "x":
     case "X":
+      if (capsLockBasılıMı) {
+        return "\u064C"; // Damme Tenvin
+      }
       return "";
 
     case "0":
@@ -282,6 +293,6 @@ export function harfLatinidenOsmaniye(
       return "٩";
 
     default:
-      return "-";
+      return latiniHarf;
   }
 }
