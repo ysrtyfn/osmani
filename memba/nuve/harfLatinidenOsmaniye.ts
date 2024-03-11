@@ -8,7 +8,7 @@ export function harfLatinidenOsmaniye(
 ) {
   switch (latiniHarf) {
     case "Enter":
-      return "";
+      return "\n";
     case "Control":
       return "";
     case "Shift":

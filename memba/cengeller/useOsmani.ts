@@ -10,12 +10,11 @@ import { tebdilKaretMevkisini } from "../aletler/tebdilKaretMevkisini";
 
 type OsmaniÇengelHususları = {
   ibtidaiKelime: string;
+  tekSatırMı: boolean;
   aramaTalepEdilince?: () => void;
 };
 
 type OsmaniÇengelCevabı<T> = [kelime: string, metinSahasıİması: RefObject<T>];
-
-// TODO: tecrübe edilmeli
 
 export const useOsmani = <T>(
   hususlar?: OsmaniÇengelHususları
@@ -29,7 +28,8 @@ export const useOsmani = <T>(
   );
 
   useEffect(() => {
-    const metinSahası = metinSahasıİması.current as HTMLInputElement;
+    let metinSahası = metinSahasıİması.current as HTMLInputElement;
+
     tebdilKaretMevkisini(metinSahası, karetMevkisiİması.current.başMevki);
 
     const tuşaBasılınca = (hadise: KeyboardEvent) => {
@@ -38,8 +38,8 @@ export const useOsmani = <T>(
       const karetMevkisiBaşı = metinSahası.selectionStart || 0;
       const karetMevkisiSonu = metinSahası.selectionEnd || 0;
 
-      if (hadise.key === "Enter") {
-        if (hususlar && hususlar.aramaTalepEdilince) {
+      if (hususlar && hususlar.tekSatırMı && hadise.key === "Enter") {
+        if (hususlar.aramaTalepEdilince) {
           hususlar.aramaTalepEdilince();
         }
       } else if (hadise.key === "Delete") {
